@@ -1,7 +1,17 @@
 package com.t6.clinicapp.models;
 
-import org.springframework.data.annotation.Id;
+import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
+@EqualsAndHashCode
+@ToString
 public class EmpresaModel {
     
     @Id
@@ -14,15 +24,23 @@ public class EmpresaModel {
 	private String quienes_somos;
 	private String mision;
 	private String vision;
+	private String ruta_logo;
 	private String objetivos;
 	private String nombre_corto;
 	private String siglas;
-	
+	private PortalModel portal;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT-5")
+	@Field("create_time")
+	private Date fecha_cambio;
+
+	// Constructor sin argumentos
 	public EmpresaModel() {
+		this.fecha_cambio = new Date();
 	}
 
 	public EmpresaModel(String id, String nit, String nombre, String direccion, String telefono, String correo,
-			String quienes_somos, String mision, String vision, String objetivos, String nombre_corto, String siglas) {
+			String quienes_somos, String mision, String vision, String ruta_logo, String objetivos, String nombre_corto,
+			String siglas, PortalModel portal) {
 		this.id = id;
 		this.nit = nit;
 		this.nombre = nombre;
@@ -32,9 +50,12 @@ public class EmpresaModel {
 		this.quienes_somos = quienes_somos;
 		this.mision = mision;
 		this.vision = vision;
+		this.ruta_logo = ruta_logo;
 		this.objetivos = objetivos;
 		this.nombre_corto = nombre_corto;
 		this.siglas = siglas;
+		this.portal = portal;
+		this.fecha_cambio = new Date();
 	}
 
 	public String getId() {
@@ -109,6 +130,14 @@ public class EmpresaModel {
 		this.vision = vision;
 	}
 
+	public String getRuta_logo() {
+		return ruta_logo;
+	}
+
+	public void setRuta_logo(String ruta_logo) {
+		this.ruta_logo = ruta_logo;
+	}
+
 	public String getObjetivos() {
 		return objetivos;
 	}
@@ -133,104 +162,20 @@ public class EmpresaModel {
 		this.siglas = siglas;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((correo == null) ? 0 : correo.hashCode());
-		result = prime * result + ((direccion == null) ? 0 : direccion.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((mision == null) ? 0 : mision.hashCode());
-		result = prime * result + ((nit == null) ? 0 : nit.hashCode());
-		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
-		result = prime * result + ((nombre_corto == null) ? 0 : nombre_corto.hashCode());
-		result = prime * result + ((objetivos == null) ? 0 : objetivos.hashCode());
-		result = prime * result + ((quienes_somos == null) ? 0 : quienes_somos.hashCode());
-		result = prime * result + ((siglas == null) ? 0 : siglas.hashCode());
-		result = prime * result + ((telefono == null) ? 0 : telefono.hashCode());
-		result = prime * result + ((vision == null) ? 0 : vision.hashCode());
-		return result;
+	public PortalModel getPortal() {
+		return portal;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		EmpresaModel other = (EmpresaModel) obj;
-		if (correo == null) {
-			if (other.correo != null)
-				return false;
-		} else if (!correo.equals(other.correo))
-			return false;
-		if (direccion == null) {
-			if (other.direccion != null)
-				return false;
-		} else if (!direccion.equals(other.direccion))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (mision == null) {
-			if (other.mision != null)
-				return false;
-		} else if (!mision.equals(other.mision))
-			return false;
-		if (nit == null) {
-			if (other.nit != null)
-				return false;
-		} else if (!nit.equals(other.nit))
-			return false;
-		if (nombre == null) {
-			if (other.nombre != null)
-				return false;
-		} else if (!nombre.equals(other.nombre))
-			return false;
-		if (nombre_corto == null) {
-			if (other.nombre_corto != null)
-				return false;
-		} else if (!nombre_corto.equals(other.nombre_corto))
-			return false;
-		if (objetivos == null) {
-			if (other.objetivos != null)
-				return false;
-		} else if (!objetivos.equals(other.objetivos))
-			return false;
-		if (quienes_somos == null) {
-			if (other.quienes_somos != null)
-				return false;
-		} else if (!quienes_somos.equals(other.quienes_somos))
-			return false;
-		if (siglas == null) {
-			if (other.siglas != null)
-				return false;
-		} else if (!siglas.equals(other.siglas))
-			return false;
-		if (telefono == null) {
-			if (other.telefono != null)
-				return false;
-		} else if (!telefono.equals(other.telefono))
-			return false;
-		if (vision == null) {
-			if (other.vision != null)
-				return false;
-		} else if (!vision.equals(other.vision))
-			return false;
-		return true;
+	public void setPortal(PortalModel portal) {
+		this.portal = portal;
 	}
 
-	@Override
-	public String toString() {
-		return "EmpresaModel [correo=" + correo + ", direccion=" + direccion + ", id=" + id + ", mision=" + mision
-				+ ", nit=" + nit + ", nombre=" + nombre + ", nombre_corto=" + nombre_corto + ", objetivos=" + objetivos
-				+ ", quienes_somos=" + quienes_somos + ", siglas=" + siglas + ", telefono=" + telefono + ", vision="
-				+ vision + "]";
+	public Date getFecha_cambio() {
+		return fecha_cambio;
 	}
 
+	public void setFecha_cambio(Date fecha_cambio) {
+		this.fecha_cambio = fecha_cambio;
+	}
 	
 }

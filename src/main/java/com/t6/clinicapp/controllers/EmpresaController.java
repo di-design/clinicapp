@@ -24,11 +24,14 @@ public class EmpresaController {
     
     @GetMapping("/listar")
     public Optional<EmpresaModel> listarEmpresa(){
+        
         return empresaService.bucarEmpresa();
     }
     
     @PostMapping("/guardar")
     public EmpresaModel guardarEmpresa(@RequestBody EmpresaModel empresaModel){
+
         return empresaService.guardarEmpresa(empresaModel);
     }
+
 }
