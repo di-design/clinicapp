@@ -2,7 +2,6 @@ package com.t6.clinicapp.utileria;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.StringTokenizer;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -35,21 +34,6 @@ public class Utileria {
 		datoListo = cadena.replaceAll("\\s{2,}", " ");
 
 		return datoListo;
-	}
-
-	// Procesa un cadena y usa como separador el espacio en blanco para poblar array
-	// de string
-	public String[] separaCadenaEnBloquesPorEspacio(String cadena) {
-		StringTokenizer tokens = new StringTokenizer(cadena, " ");
-		int nDatos = tokens.countTokens();
-		String[] ArreglodatosSalida = new String[nDatos];
-		int i = 0;
-		while (tokens.hasMoreTokens()) {
-			String str = tokens.nextToken();
-			ArreglodatosSalida[i] = str;
-			i++;
-		}
-		return ArreglodatosSalida;
 	}
 
 	public static String guardarArchivo(MultipartFile multiPart, String ruta) {

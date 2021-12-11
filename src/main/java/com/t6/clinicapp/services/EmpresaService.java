@@ -35,6 +35,7 @@ public class EmpresaService {
         Optional <EmpresaModel> empresabbdd = empresaRepo.findById("1");
         PortalModel portal = new PortalModel();
 
+        // Ajusta cadenas antes de persistir
         empresabbdd.get().setNit(util.eliminarEspaciosEnBlanco(empresa.getNit()));
         empresabbdd.get().setNombre(util.ajustarCadena(empresa.getNombre()));
         empresabbdd.get().setDireccion(util.ajustarCadena(empresa.getDireccion()));

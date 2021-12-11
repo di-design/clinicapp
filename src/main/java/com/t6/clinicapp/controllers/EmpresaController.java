@@ -24,7 +24,7 @@ public class EmpresaController {
     
     @GetMapping("/listar")
     public Optional<EmpresaModel> listarEmpresa(){
-        
+
         return empresaService.bucarEmpresa();
     }
     
